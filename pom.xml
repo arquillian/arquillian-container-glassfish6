@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>36</version>
+    <relativePath />
+  </parent>
+
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Artifact Configuration -->
+  <groupId>org.jboss.arquillian.container</groupId>
+  <artifactId>arquillian-parent-glassfish6</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Arquillian Container Parent GlassFish 6+</name>
+  <description>GlassFish 6.x and Later Container integrations for the Arquillian Project</description>
+
+  <scm>
+    <connection>scm:git:git://git@github.com:arquillian/arquillian-container-glassfish6.git</connection>
+    <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-container-glassfish6.git</developerConnection>
+    <url>git://github.com/arquillian/arquillian-container-glassfish6.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <!-- Properties -->
+  <properties>
+
+    <version.arquillian_core>1.7.0.Alpha1</version.arquillian_core>
+    <!-- There is no release of glassfish6 yet, so it needs to be built locally
+    https://github.com/eclipse-ee4j/glassfish.git
+    -->
+    <version.glassfish6>6.0.0-SNAPSHOT</version.glassfish6>
+    <!-- The Jakarta EE 9 based release version -->
+    <version.jersey>3.0.0-M4</version.jersey>
+    <jakarta.cdi.version>3.0.0-M3</jakarta.cdi.version>
+    <jakarta.el.version>4.0.0.M1</jakarta.el.version>
+    <jakarta.interceptor.version>2.0.0-RC2</jakarta.interceptor.version>
+    <jakarta.ejb.version>4.0.0-RC1</jakarta.ejb.version>
+    <jakarta.annotation.version>2.0.0-RC1</jakarta.annotation.version>
+    <jakarta.servlet.version>5.0.0-M1</jakarta.servlet.version>
+    <jakarta.jaxb.version>3.0.0-RC3</jakarta.jaxb.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Jakarta EE -->
+      <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>2.0.0-RC1</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.inject</groupId>
+        <artifactId>jakarta.inject-api</artifactId>
+        <version>2.0.0-RC4</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.enterprise</groupId>
+        <artifactId>jakarta.enterprise.cdi-api</artifactId>
+        <version>${jakarta.cdi.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>${jakarta.servlet.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.ejb</groupId>
+        <artifactId>jakarta.ejb-api</artifactId>
+        <version>${jakarta.ejb.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- JAX-RS implementation -->
+      <dependency>
+        <groupId>org.glassfish.jersey</groupId>
+        <artifactId>jersey-bom</artifactId>
+        <version>${version.jersey}</version>
+      </dependency>
+
+      <!-- GlassFish -->
+      <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>${version.jersey}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.inject</groupId>
+        <artifactId>jersey-hk2</artifactId>
+        <version>${version.jersey}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-multipart</artifactId>
+        <version>${version.jersey}</version>
+      </dependency>
+      <!-- TODO for port of embedded version -->
+      <dependency>
+        <groupId>org.glassfish.main.common</groupId>
+        <artifactId>simple-glassfish-api</artifactId>
+        <version>${version.glassfish6}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.main.web</groupId>
+        <artifactId>web-embed-api</artifactId>
+        <version>${version.glassfish6}</version>
+      </dependency>
+      <!-- -->
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${version.arquillian_core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-build</artifactId>
+        <version>${version.arquillian_core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <modules>
+    <module>glassfish-common</module>
+    <module>glassfish-managed-6</module>
+    <!--
+    TODO:
+    <module>glassfish-embedded-6</module>
+    <module>glassfish-remote-6</module>
+    -->
+  </modules>
+
+  <profiles>
+    <!--
+    This profile enables consuming artifacts from the https://jakarta.oss.sonatype.org repository.
+    This is needed when building against staged Jakarta artifacts that have not been released
+    to maven central.
+    -->
+    <profile>
+      <id>staging</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>jakarta-nexus-staging</id>
+          <name>Jakarta Nexus Staging</name>
+          <url>https://jakarta.oss.sonatype.org/content/repositories/staging/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>jakarta-nexus-staging</id>
+          <name>Jakarta Nexus Staging</name>
+          <url>https://jakarta.oss.sonatype.org/content/repositories/staging/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+</project>

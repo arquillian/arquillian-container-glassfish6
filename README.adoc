@@ -1,0 +1,17 @@
+= Arquillian GlassFish 6 Container Integration
+
+This is an initial port of the GlassFish 5 and earlier Arquillian container integrations to
+the Jakarta EE 9 baased GlassFish 6 container.
+
+== Dependencies
+In this early stage, the following projects need to be build locally from source as they have
+no release:
+
+* https://github.com/jakartaredhat/arquillian-core/tree/master/protocols/servlet-jakarta
+* https://github.com/eclipse-ee4j/glassfish
+
+== Building
+
+Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
+
+mvn -Pstaging install
