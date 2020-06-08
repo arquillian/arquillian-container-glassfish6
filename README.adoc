@@ -1,7 +1,11 @@
 = Arquillian GlassFish 6 Container Integration
 
 This is an initial port of the GlassFish 5 and earlier Arquillian container integrations to
-the Jakarta EE 9 baased GlassFish 6 container.
+GlassFish 6, which builds on the Jakarta EE 9 APIs. Jakarta EE 9 switched the based API package namespace from javax.*
+to jakarta.*, introducing a source and binary incompatibility with previous versions of Java EE and Jakarta EE 8.
+
+Because of this, the GlassFish container integration for 6.x and later has been broken out into a new
+project.
 
 == Dependencies
 In this early stage, the following projects need to be build locally from source as they have
@@ -15,3 +19,7 @@ no release:
 Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
 
 mvn -Pstaging install
+
+== Blockers
+Currently the tests due not run fully due to an inability to deploy
+https://github.com/eclipse-ee4j/glassfish/issues/23080

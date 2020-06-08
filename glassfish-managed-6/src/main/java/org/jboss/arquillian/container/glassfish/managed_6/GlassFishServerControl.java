@@ -46,7 +46,7 @@ class GlassFishServerControl {
             +
             "https://issues.apache.org/jira/browse/DERBY-6438";
 
-    private static final List<String> NO_ARGS = new ArrayList<String>();
+    private static final List<String> NO_ARGS = new ArrayList<>();
 
     private static final Logger logger = Logger.getLogger(GlassFishServerControl.class.getName());
 
@@ -84,7 +84,10 @@ class GlassFishServerControl {
     }
 
     private void stopContainer() throws LifecycleException {
-        executeAdminDomainCommand("Stopping container", "stop-domain", NO_ARGS, createProcessOutputConsumer());
+        List<String> args = new ArrayList<>();
+        // Adding this to workaround current stop failures
+        args.add("--kill");
+        executeAdminDomainCommand("Stopping container", "stop-domain", args, createProcessOutputConsumer());
     }
 
     private void startDerbyDatabase() throws LifecycleException {
