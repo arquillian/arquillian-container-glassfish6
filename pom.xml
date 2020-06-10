@@ -144,10 +144,10 @@
   <modules>
     <module>glassfish-common</module>
     <module>glassfish-managed-6</module>
+    <module>glassfish-remote-6</module>
     <!--
     TODO:
     <module>glassfish-embedded-6</module>
-    <module>glassfish-remote-6</module>
     -->
   </modules>
 

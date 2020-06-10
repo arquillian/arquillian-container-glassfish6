@@ -20,6 +20,9 @@
  */
 package org.jboss.arquillian.container.glassfish.clientutils;
 
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.jboss.arquillian.container.glassfish.CommonGlassFishConfiguration;
 import org.jboss.arquillian.container.spi.client.protocol.metadata.HTTPContext;
@@ -36,13 +39,16 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static jakarta.ws.rs.core.HttpHeaders.USER_AGENT;
+
 public class GlassFishClientService implements GlassFishClient {
 
     private static final String WEBMODULE = "WebModule";
     private static final String SERVLET = "Servlet";
     private static final String RUNNING_STATUS = "RUNNING";
+    public static final String USER_AGENT_VALUE = "arquillian-glassfish-managed-6";
 
-    private String target = GlassFishClient.ADMINSERVER;
+    private String target;
 
     private String adminBaseUrl;
 
@@ -86,7 +92,6 @@ public class GlassFishClientService implements GlassFishClient {
      * -   In case of cluster tries to fund an instance which has
      * RUNNING status
      *
-     * @return none
      */
     public void startUp() throws GlassFishClientException {
 
@@ -149,19 +154,19 @@ public class GlassFishClientService implements GlassFishClient {
             Map extraProperties = (Map) responseMap.get("extraProperties");
             if (extraProperties != null) {
                 Object versionNumberObj = extraProperties.get("version-number");
-                if (versionNumberObj != null && versionNumberObj instanceof String) {
+                if (versionNumberObj instanceof String) {
                     String version = (String) versionNumberObj;
                     StringTokenizer tokenizer = new StringTokenizer(version, ".");
                     if (tokenizer.hasMoreElements()) {
                         try {
-                            majorVersion = Integer.valueOf(tokenizer.nextToken());
+                            majorVersion = Integer.parseInt(tokenizer.nextToken());
                         } catch (NumberFormatException ignore) {
                             log.info("Exception getting major version for: " + version);
                         }
                     }
                     if (tokenizer.hasMoreElements()) {
                         try {
-                            minorVersion = Integer.valueOf(tokenizer.nextToken());
+                            minorVersion = Integer.parseInt(tokenizer.nextToken());
                         } catch (NumberFormatException ignore) {
                             log.info("Exception getting minor version for: " + version);
                         }
@@ -171,6 +176,9 @@ public class GlassFishClientService implements GlassFishClient {
         }
     }
 
+    // the REST resource path template to retrieve the list of server instances
+    private static final String INSTACE_LIST = "/list-instances";
+
     /**
      * Filtering on the status of the instances
      * -	If the standalone server instance status is RUNNING, returns the nodeAddress,
@@ -178,12 +186,9 @@ public class GlassFishClientService implements GlassFishClient {
      * -	In case of cluster, returns the first RUNNING instance from the list,
      * but throws an exception if can not find any.
      *
-     * @param nodeAddressList
+     * @param nodeAddressList - list of server node addresses
      * @return nodeAddress - if any has RUNNING status
      */
-    // the REST resource path template to retrieve the list of server instances
-    private static final String INSTACE_LIST = "/list-instances";
-
     private NodeAddress runningInstanceFilter(List<NodeAddress> nodeAddressList) {
         List<Map> instanceList = getClientUtil().getInstancesList(INSTACE_LIST);
 
@@ -210,36 +215,31 @@ public class GlassFishClientService implements GlassFishClient {
         }
     }
 
-    /**
-     * Do deploy an application defined by a multipart form's fileds
-     * to a target server or a cluster of GlassFish 3.1
-     *
-     * @param name        - name of the appliacation
-     * form		- a form of MediaType.MULTIPART_FORM_DATA_TYPE
-     * @return subComponents - a map of SubComponents of the application
-     */
     // the REST resource path template to retrieve the list of server instances
     private static final String APPLICATION = "/applications/application";
     private static final String APPLICATION_RESOURCE = "/applications/application/{name}";
 
+    /**
+     * Do deploy an application defined by a multipart form's fileds
+     * to a target server or a cluster of GlassFish 6.x
+     *
+     * @param name - name of the appliacation
+     * @param form - a form of MediaType.MULTIPART_FORM_DATA_TYPE
+     * @return subComponents - a map of SubComponents of the application
+     */
     public HTTPContext doDeploy(String name, FormDataMultiPart form) {
-        String listSubComponents;
-        if (majorVersion >= 4) {
-            listSubComponents = "/applications/application/{application}/list-sub-components";
-            //            listSubComponents = "/applications/application/{application}/list-sub-components?type=servlets";
-        } else {
-            listSubComponents = "/applications/application/list-sub-components?id={application}";
-        }
-
-        Map<String, String> SubComponents = new HashMap<String, String>();
-
         // Deploy the application on the GlassFish server
         getClientUtil().POSTMultiPartRequest(APPLICATION, form);
 
         // Fetch the list of SubComponents of the application
-        String path = listSubComponents.replace("{application}", name);
+        WebTarget listSubCompsGET = getClientUtil().prepareGET();
+        Response response = listSubCompsGET.path(APPLICATION_RESOURCE+"/list-sub-components")
+            .resolveTemplate("name", name)
+            .request(MediaType.APPLICATION_XML_TYPE)
+            .header(USER_AGENT, USER_AGENT_VALUE)
+            .get();
 
-        Map subComponentsResponce = getClientUtil().GETRequest(path);
+        Map subComponentsResponce = getClientUtil().getResponseMap(response);
         Map<String, String> subComponents = (Map<String, String>) subComponentsResponce.get("properties");
 
         // Build up the HTTPContext object using the nodeAddress information
@@ -255,7 +255,7 @@ public class GlassFishClientService implements GlassFishClient {
                 componentName = subComponent.getKey().toString();
                 if (WEBMODULE.equals(subComponent.getValue())) {
 
-                    List<Map> children = (List<Map>) subComponentsResponce.get("children");
+                    List<Map<String, Map<String, String>>> children = (List<Map<String, Map<String, String>>>) subComponentsResponce.get("children");
                     // Override the application contextRoot by the webmodul's contextRoot
                     contextRoot = resolveWebModuleContextRoot(componentName, children);
                     resolveWebModuleSubComponents(name, componentName, contextRoot, httpContext);
@@ -298,6 +298,14 @@ public class GlassFishClientService implements GlassFishClient {
         return true;
     }
 
+    public int getMajorVersion() {
+        return majorVersion;
+    }
+
+    public int getMinorVersion() {
+        return minorVersion;
+    }
+
     /**
      * Get the standalone servers list associated with the DAS
      *
@@ -337,14 +345,14 @@ public class GlassFishClientService implements GlassFishClient {
         Map<String, String> applicationAttributes = getClientUtil().getAttributes(path);
 
         // pull the contextRoot from the applicasion's attributes
-        String contextRoot = ((Object) applicationAttributes.get("contextRoot")).toString();
+        String contextRoot = applicationAttributes.get("contextRoot").toString();
         return contextRoot;
     }
 
-    private String resolveWebModuleContextRoot(String componentName, List<Map> modules) {
+    private String resolveWebModuleContextRoot(String componentName, List<Map<String, Map<String, String>>> modules) {
         String contextRoot = null;
-        for (Map module : modules) {
-            Map<String, String> moduleProperties = (Map<String, String>) module.get("properties");
+        for (Map<String, Map<String, String>> module : modules) {
+            Map<String, String> moduleProperties = module.get("properties");
             if (moduleProperties != null && !moduleProperties.isEmpty()) {
                 String moduleInfo = moduleProperties.get("moduleInfo");
                 if (moduleInfo.startsWith(componentName)) {
@@ -353,7 +361,7 @@ public class GlassFishClientService implements GlassFishClient {
                     // The contextRoot is extracted, and removed of any prefixed slash.
                     String[] moduleInfoElements = moduleInfo.split(":");
                     contextRoot = moduleInfoElements[2];
-                    contextRoot = contextRoot.indexOf("/") > -1 ? contextRoot.substring(contextRoot.indexOf("/"))
+                    contextRoot = contextRoot.contains("/") ? contextRoot.substring(contextRoot.indexOf("/"))
                         : contextRoot;
                 }
             } else {
@@ -376,35 +384,36 @@ public class GlassFishClientService implements GlassFishClient {
      *     - httpContext to be updated
      */
     private void resolveWebModuleSubComponents(String name, String module, String context, HTTPContext httpContext) {
-        String webmoduleResource =
-                "/applications/application/{application}/list-sub-components";
         // Fetch the list of SubComponents of the application
-        String applicationPath = webmoduleResource.replace("{application}", name);
+        WebTarget listAppSubCompGET = getClientUtil().prepareGET();
+        Response response = listAppSubCompGET.path("/applications/application/{application}/list-sub-components")
+            .resolveTemplate("application", name)
+            .queryParam("appname", name)
+            .queryParam("id", module)
+            .queryParam("type", "servlets")
+            .request(MediaType.APPLICATION_XML_TYPE)
+            .header(USER_AGENT, USER_AGENT_VALUE)
+            .get();
 
-        Properties properties = new Properties();
-        properties.setProperty("appname", name);
-        properties.setProperty("id", module);
-        properties.setProperty("type", "servlets");
-
-        Map subComponentsResponce = getClientUtil().GETRequest(applicationPath, properties);
+        Map<String, Object> subComponentsResponce = getClientUtil().getResponseMap(response);
         Map<String, String> subComponents = (Map<String, String>) subComponentsResponce.get("properties");
 
         String componentName;
-        for (Map.Entry subComponent : subComponents.entrySet()) {
-            componentName = subComponent.getKey().toString();
+        for (Map.Entry<String, String> subComponent : subComponents.entrySet()) {
+            componentName = subComponent.getKey();
             httpContext.add(new Servlet(componentName, context));
         }
     }
 
-    /**
-     * Get the list of server instances of the cluster
-     *
-     * @param target
-     * @return server instances map
-     */
     // the REST resource path template to retrieve the list of server instances
     private static final String MEMBER_SERVERS_RESOURCE = "/clusters/cluster/{target}/server-ref";
 
+    /**
+     * Get the list of server instances of the cluster
+     *
+     * @param target -
+     * @return server instances map
+     */
     protected Map<String, String> getServerInstances(String target) {
         String path = MEMBER_SERVERS_RESOURCE.replace("{target}", target);
         Map<String, String> serverInstances = getClientUtil().getChildResources(path);
@@ -557,9 +566,14 @@ public class GlassFishClientService implements GlassFishClient {
      * server/cluster configuration
      */
     private List<String> getVirtualServers(Map<String, String> attributes) {
-        String virtualServerPath = VIRTUAL_SERVERS.replace("{config}", attributes.get("configRef")).replace("{target}",
-            attributes.get("name"));
-        Map virtualServersResponse = getClientUtil().GETRequest(virtualServerPath);
+        String config = attributes.get("configRef").replace("{target}", attributes.get("name"));
+        WebTarget vsGET = getClientUtil().prepareGET();
+        Response response = vsGET.path(VIRTUAL_SERVERS)
+            .resolveTemplate("config", config)
+            .request(MediaType.APPLICATION_XML_TYPE)
+            .header(USER_AGENT, USER_AGENT_VALUE)
+            .get();
+        Map virtualServersResponse = getClientUtil().getResponseMap(response);
         List<Map> virtualServers = (List<Map>) virtualServersResponse.get("children");
         List<String> virtualServerNames = new ArrayList<String>();
         for (Map virtualServer : virtualServers) {

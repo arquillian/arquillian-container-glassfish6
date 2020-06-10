@@ -24,6 +24,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -48,6 +49,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static jakarta.ws.rs.core.HttpHeaders.USER_AGENT;
 
 public class GlassFishClientUtil {
 
@@ -77,22 +80,19 @@ public class GlassFishClientUtil {
     }
 
     public Map<String, String> getAttributes(String additionalResourceUrl) {
-        return getAttributes(additionalResourceUrl, new Properties());
-    }
-    public Map<String, String> getAttributes(String additionalResourceUrl, Properties properties) {
-        Map responseMap = GETRequest(additionalResourceUrl, properties);
+        Map<String, Object> responseMap = GETRequest(additionalResourceUrl);
         Map<String, String> attributes = new HashMap<String, String>();
 
-        Map resultExtraProperties = (Map) responseMap.get("extraProperties");
+        Map<String, Map<String, String>> resultExtraProperties = (Map<String, Map<String, String>>) responseMap.get("extraProperties");
         if (resultExtraProperties != null) {
-            attributes = (Map<String, String>) resultExtraProperties.get("entity");
+            attributes = resultExtraProperties.get("entity");
         }
 
         return attributes;
     }
 
     public Map<String, String> getChildResources(String additionalResourceUrl) throws GlassFishClientException {
-        Map responseMap = GETRequest(additionalResourceUrl);
+        Map<String, Object> responseMap = GETRequest(additionalResourceUrl);
         Map<String, String> childResources = new HashMap<String, String>();
 
         Map resultExtraProperties = (Map) responseMap.get("extraProperties");
@@ -103,19 +103,38 @@ public class GlassFishClientUtil {
         return childResources;
     }
 
-    public Map GETRequest(String additionalResourceUrl) {
-        return GETRequest(additionalResourceUrl, new Properties());
+    /**
+     * Create a WebTarget for accessing a subpath under the admin endpoint that has authorization, logging
+     * and CSRF setup.
+     *
+     * @return WebTarget for admin base endpoint
+     */
+    public WebTarget prepareGET() {
+        ClientBuilder builder = ClientBuilder.newBuilder();
+        ClientConfig jerseyConfig = new ClientConfig();
+        if (configuration.isAuthorisation()) {
+            jerseyConfig.register(HttpAuthenticationFeature.basic(configuration.getAdminUser(), configuration.getAdminPassword()));
+        }
+        if (configuration.isDebugRequests()) {
+            jerseyConfig.register(new LoggingFeature(Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+                                                     Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 10000));
+        }
+        builder.withConfig(jerseyConfig);
+        builder.register(new CsrfProtectionFilter());
+        Client client = builder.build();
+        return client.target(this.adminBaseUrl);
     }
-    public Map GETRequest(String additionalResourceUrl, Properties properties) {
+
+    /**
+     * Invoke a GET request against the adminSubPath
+     * @param adminSubPath - subpath of the admin command
+     * @return map of the parsed XML response
+     */
+    public Map<String, Object> GETRequest(String adminSubPath) {
         try {
-            Invocation.Builder getBuilder = prepareClient(additionalResourceUrl, false);
-            if(properties.size() > 0) {
-                for(String key : properties.stringPropertyNames()) {
-                    getBuilder.property(key, properties.getProperty(key));
-                }
-            }
+            Invocation.Builder getBuilder = prepareClient(adminSubPath, false);
             Response response = getBuilder.buildGet().invoke();
-            Map responseMap = getResponseMap(response);
+            Map<String, Object> responseMap = getResponseMap(response);
 
             return responseMap;
         } catch (Exception e) {
@@ -135,12 +154,13 @@ public class GlassFishClientUtil {
         return instancesList;
     }
 
-    public Map POSTMultiPartRequest(String additionalResourceUrl, FormDataMultiPart form) {
+    public Map<String, Object> POSTMultiPartRequest(String additionalResourceUrl, FormDataMultiPart form) {
         try {
-        Response response = prepareClient(additionalResourceUrl, true).accept(MediaType.MULTIPART_FORM_DATA_TYPE)
-            .buildPost(Entity.entity(form, MediaType.MULTIPART_FORM_DATA))
-            .invoke();
-        Map responseMap = getResponseMap(response);
+            Response response = prepareClient(additionalResourceUrl, true)
+                .accept(MediaType.MULTIPART_FORM_DATA_TYPE)
+                .buildPost(Entity.entity(form, MediaType.MULTIPART_FORM_DATA))
+                .invoke();
+            Map<String, Object> responseMap = getResponseMap(response);
 
         return responseMap;
         } catch (Exception e) {
@@ -175,10 +195,10 @@ public class GlassFishClientUtil {
         return client.target(this.adminBaseUrl)
             .path(additionalResourceUrl)
             .request(MediaType.APPLICATION_XML_TYPE)
-            .header("X-GlassFish-6", "ignore");
+            .header(USER_AGENT, GlassFishClientService.USER_AGENT_VALUE);
     }
 
-    private Map<String, Object> getResponseMap(Response response) throws GlassFishClientException {
+    Map<String, Object> getResponseMap(Response response) throws GlassFishClientException {
         Map<String, Object> responseMap = new HashMap<>();
         String message = "";
         final String xmlDoc = response.readEntity(String.class);

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.jboss.arquillian.container</groupId>
@@ -9,12 +8,13 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>arquillian-glassfish-managed-6</artifactId>
-  <name>Arquillian Container GlassFish Managed 6</name>
-  <description>GlassFish 6 Managed Container integration for the Arquillian Project</description>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>arquillian-glassfish-remote-6</artifactId>
+  <name>Arquillian Container GlassFish Remote 6.x</name>
+  <description>GlassFish 6.x Remote Container integration for the Arquillian Project</description>
 
   <dependencies>
-
     <dependency>
       <groupId>jakarta.ejb</groupId>
       <artifactId>jakarta.ejb-api</artifactId>
@@ -83,77 +83,29 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>setup-glassfish</id>
-            <phase>process-test-classes</phase>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>${groupId}</groupId>
-                  <artifactId>${artifactId}</artifactId>
-                  <version>${version.glassfish}</version>
-                  <type>zip</type>
-                  <outputDirectory>${project.build.directory}</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <systemPropertyVariables>
-            <glassfish.home>${glassfish.home}</glassfish.home>
-            <enableDerby>${enableDerby}</enableDerby>
-          </systemPropertyVariables>
+          <skip>true</skip>
         </configuration>
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
-      <id>6.x</id>
+      <id>integration</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>enforce-java</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <requireJavaVersion>
-                      <version>[1.8,9)</version>
-                    </requireJavaVersion>
-                  </rules>
-                </configuration>
-              </execution>
-            </executions>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
           </plugin>
         </plugins>
       </build>
-      <properties>
-        <groupId>org.glassfish.main.distributions</groupId>
-        <artifactId>glassfish</artifactId>
-        <version.glassfish>6.0.0-SNAPSHOT</version.glassfish>
-        <glassfish.home>glassfish6</glassfish.home>
-        <enableDerby>false</enableDerby>
-      </properties>
     </profile>
   </profiles>
 </project>
