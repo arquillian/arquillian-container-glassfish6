@@ -11,15 +11,14 @@ project.
 In this early stage, the following projects need to be build locally from source as they have
 no release:
 
-* https://github.com/jakartaredhat/arquillian-core/tree/master/protocols/servlet-jakarta
-* https://github.com/eclipse-ee4j/glassfish
+=== https://github.com/jakartaredhat/arquillian-core/tree/master/protocols/servlet-jakarta
+. git clone https://github.com/jakartaredhat/arquillian-core.git
+. cd arquillian-core/protocols/servlet-jakarta
+. git checkout jakartaee9
+. mvn install
 
 == Building
 
 Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
 
 mvn -Pstaging install
-
-== Blockers
-Currently the tests due not run fully due to an inability to deploy
-https://github.com/eclipse-ee4j/glassfish/issues/23080
