@@ -33,10 +33,7 @@
     https://github.com/jakartaredhat/arquillian-core.git
     using the jakartaee9 branch
     -->
-    <version.arquillian_core>1.7.0.Alpha1-M1</version.arquillian_core>
-    <!-- There is no release of glassfish6 yet, so it needs to be built locally
-    https://github.com/eclipse-ee4j/glassfish.git
-    -->
+    <version.arquillian_core>1.7.0.Alpha2</version.arquillian_core>
     <version.glassfish6>6.0.0-M1</version.glassfish6>
     <!-- The Jakarta EE 9 based release version -->
     <version.jersey>3.0.0-M4</version.jersey>
@@ -102,17 +99,7 @@
         <artifactId>jersey-media-multipart</artifactId>
         <version>${version.jersey}</version>
       </dependency>
-      <!-- TODO for port of embedded version -->
-      <dependency>
-        <groupId>org.glassfish.main.common</groupId>
-        <artifactId>simple-glassfish-api</artifactId>
-        <version>${version.glassfish6}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.glassfish.main.web</groupId>
-        <artifactId>web-embed-api</artifactId>
-        <version>${version.glassfish6}</version>
-      </dependency>
+
       <!-- -->
       <dependency>
         <groupId>org.jboss.arquillian</groupId>

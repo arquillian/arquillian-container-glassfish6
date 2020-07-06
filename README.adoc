@@ -8,6 +8,7 @@ Because of this, the GlassFish container integration for 6.x and later has been 
 project.
 
 == Dependencies
+TODO; this needs to be removed for release.
 In this early stage, the following projects need to be build locally from source as they have
 no release:
 
@@ -22,3 +23,8 @@ no release:
 Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
 
 mvn -Pstaging install
+
+== TODO
+The GlassFish 5.x and earlier version had support for an embedded version of the container integration.
+Those APIs have changed significantly and the embedded container support still needs to be updated
+for GlassFish 6.x.
