@@ -7,22 +7,11 @@ to jakarta.*, introducing a source and binary incompatibility with previous vers
 Because of this, the GlassFish container integration for 6.x and later has been broken out into a new
 project.
 
-== Dependencies
-TODO; this needs to be removed for release.
-In this early stage, the following projects need to be build locally from source as they have
-no release:
-
-=== https://github.com/jakartaredhat/arquillian-core/tree/master/protocols/servlet-jakarta
-. git clone https://github.com/jakartaredhat/arquillian-core.git
-. cd arquillian-core/protocols/servlet-jakarta
-. git checkout jakartaee9
-. mvn install
-
 == Building
 
 Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
 
-mvn -Pstaging install
+`mvn -Pstaging install`
 
 == TODO
 The GlassFish 5.x and earlier version had support for an embedded version of the container integration.
