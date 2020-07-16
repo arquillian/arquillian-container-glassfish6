@@ -13,7 +13,10 @@ jobs:
           key: circleci-arquillian-container-glassfish-6-{{ checksum "pom.xml" }}
       - run: ./mvnw verify -q -U -DskipTests # pre-fetch dependencies (dependency:resolve fails)
       - run: ./mvnw verify
-      - run: tar -czvf glassfish-managed-6.tar.gz glassfish-managed-6/target
+      - run:
+          name: Target glassfish-managed-6/target
+          command: tar -czvf glassfish-managed-6.tar.gz glassfish-managed-6/target
+          when: always
       - store_artifacts:
           path: glassfish-managed-6.tar.gz
       - store_artifacts:
