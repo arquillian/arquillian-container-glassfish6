@@ -15,7 +15,7 @@ jobs:
       - run: ./mvnw verify
       - run: tar -czvf glassfish-managed-6.tar.gz glassfish-managed-6/target
       - store_artifacts:
-        path: glassfish-managed-6.tar.gz
+          path: glassfish-managed-6.tar.gz
       - store_artifacts:
           path: glassfish-managed-6/target/glassfish6/glassfish/domains/domain1/logs/server.log
       - store_test_results:
