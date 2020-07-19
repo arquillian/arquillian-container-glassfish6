@@ -173,6 +173,9 @@ class GlassFishServerControl {
         if (result != 0) {
             throw new LifecycleException("Unable to execute " + cmd.toString());
         }
+        if (config.isOutputToConsole()) {
+            System.out.println(description + " process started");
+        }
     }
 
     private List<String> buildCommand(String command, List<String> args) {
