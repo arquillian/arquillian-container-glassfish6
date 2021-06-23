@@ -29,7 +29,7 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha9</version.arquillian_core>
+    <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
     <version.glassfish6>6.0.0</version.glassfish6>
     <!-- The Jakarta EE 9 based release version -->
     <version.jersey>3.0.1</version.jersey>
