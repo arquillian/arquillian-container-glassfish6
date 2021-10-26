@@ -25,6 +25,8 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -34,7 +36,6 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.jboss.arquillian.container.glassfish.CommonGlassFishConfiguration;
 
-import jakarta.ws.rs.core.MediaType;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -195,6 +196,7 @@ public class GlassFishClientUtil {
         return client.target(this.adminBaseUrl)
             .path(additionalResourceUrl)
             .request(MediaType.APPLICATION_XML_TYPE)
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_TYPE)
             .header(USER_AGENT, GlassFishClientService.USER_AGENT_VALUE);
     }
 
