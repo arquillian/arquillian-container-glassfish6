@@ -14,11 +14,11 @@
 
   <!-- Artifact Configuration -->
   <groupId>org.jboss.arquillian.container</groupId>
-  <artifactId>arquillian-parent-glassfish6</artifactId>
+  <artifactId>arquillian-container-glassfish-jakarta</artifactId>
   <version>1.0.0.Final-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Arquillian Container Parent GlassFish 6+</name>
-  <description>GlassFish 6.x and Later Container integrations for the Arquillian Project</description>
+  <name>Arquillian Container Parent GlassFish 7+</name>
+  <description>GlassFish 7.x and Later Container integrations for the Arquillian Project</description>
 
   <scm>
     <connection>scm:git:git://git@github.com:arquillian/arquillian-container-glassfish6.git</connection>
@@ -29,15 +29,15 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha2</version.arquillian_core>
-    <version.glassfish6>6.2.3</version.glassfish6>
+    <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
+    <version.glassfish>7.0.0-M4</version.glassfish>
     <!-- The Jakarta EE 10 based release version -->
-    <version.jersey>3.1.0-M1</version.jersey>
+    <version.jersey>3.1.0-M5</version.jersey>
     <jakarta.cdi.version>4.0.0</jakarta.cdi.version>
-    <jakarta.el.version>4.0.0</jakarta.el.version>
-    <jakarta.interceptor.version>2.0.0</jakarta.interceptor.version>
+    <jakarta.el.version>5.0.0</jakarta.el.version>
+    <jakarta.interceptor.version>2.1.0</jakarta.interceptor.version>
     <jakarta.ejb.version>4.0.0</jakarta.ejb.version>
-    <jakarta.annotation.version>2.0.0</jakarta.annotation.version>
+    <jakarta.annotation.version>2.1.0</jakarta.annotation.version>
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     <jakarta.jaxb.version>4.0.0</jakarta.jaxb.version>
   </properties>
@@ -71,7 +71,6 @@
         <version>${jakarta.ejb.version}</version>
         <scope>test</scope>
       </dependency>
-
       <!-- JAX-RS implementation -->
       <dependency>
         <groupId>org.glassfish.jersey</groupId>
@@ -129,8 +128,8 @@
 
   <modules>
     <module>glassfish-common</module>
-    <module>glassfish-managed-6</module>
-    <module>glassfish-remote-6</module>
+    <module>glassfish-managed</module>
+    <module>glassfish-remote</module>
     <!--
     TODO:
     <module>glassfish-embedded-6</module>
