@@ -1,6 +1,6 @@
 
 
-How to use this container integration?
+= How to use this container integration?
 
 This implementation provides the Arquillian integration with your remote GlassFish 3.1 
 container. You can use your normal GlassFish 3.1 deployment to perform your test. The 
@@ -11,42 +11,42 @@ or virtual nodes, or on the same one.
 
 The properties you can use:
 
-adminHttps: You can use it to specify whether the http or https protocol shall be used 
+* adminHttps: You can use it to specify whether the http or https protocol shall be used
 to access the DAS. The property value can be true or false. If omitted the default value 
 is false, meaning the http protocol shall be used.
 
-adminHost: Glassfish Admin Server (DAS) host address. If  omitted the default value is 
+* adminHost: Glassfish Admin Server (DAS) host address. If  omitted the default value is
 localhost.
 
-adminPort: The port to be used to access Glassfish Admin API. If  omitted the default 
+* adminPort: The port to be used to access Glassfish Admin API. If  omitted the default
 value is 4848.
 
-adminUser: The name of the admin user of your DAS. If omitted, no authentication will 
+* adminUser: The name of the admin user of your DAS. If omitted, no authentication will
 be used to access the DAS. This case you must have empty password for your admin user of 
 your domain. 
 
-adminPassword: The password of the admin user of your DAS. Canot be omitted if you 
+* adminPassword: The password of the admin user of your DAS. Canot be omitted if you
 declare the admin user. If no authentication will be used to access the DAS you must 
 have empty password for your admin user of your domain. 
 
-serverHttps: You can use it to specify whether the http or https protocol shall be used 
+* serverHttps: You can use it to specify whether the http or https protocol shall be used
 to access the target server for deployment, on which your test runs. The property value 
 can be true or false. If omitted the default value is false, meaning the http protocol 
 shall be used.
 
-target: GlassFish has a notion of target, which specifies the target to which you are 
+* target: GlassFish has a notion of target, which specifies the target to which you are
 deploying. We use the ?target? as property key with the same semantics as the standard 
 GlassFish utilities do.
 
 Valid values of the target are:
  
- -  server:  Deploys the component to the default Admin Server instance (on your DAS 
+*  server:  Deploys the component to the default Admin Server instance (on your DAS
  server). This is the default value if the property is omitted.
 
- -  instance_name: Deploys the component to the specified stand-alone sever instance, 
+*  instance_name: Deploys the component to the specified stand-alone sever instance,
  which may be on the same hosts or can be on a different one as the DAS server.
 
- -  cluster_name: Deploys the component to every server instance in the cluster. They 
+*  cluster_name: Deploys the component to every server instance in the cluster. They
  can be on the same or on several other hosts as the DAS server. Note: Arquillion use 
  only one instance to run the test case.
  
