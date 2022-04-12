@@ -12,7 +12,15 @@ jobs:
       - restore_cache:
           key: circleci-arquillian-container-glassfish-6-{{ checksum "pom.xml" }}
       - run: ./mvnw verify -q -U -DskipTests # pre-fetch dependencies (dependency:resolve fails)
-      - run: ./mvnw verify
+      - run: ./mvnw -X verify
+      - run:
+          name: Target glassfish-managed-6/target
+          command: tar -czvf glassfish-managed-6.tar.gz glassfish-managed/target
+          when: always
+      - store_artifacts:
+          path: glassfish-managed-6.tar.gz
+      - store_artifacts:
+          path: glassfish-managed/target/glassfish6/glassfish/domains/domain1/logs/server.log
       - store_test_results:
           path: target/surefire-reports
       - save_cache:
@@ -27,4 +35,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              jdk-version: ["8", "9"]
+              jdk-version: ["8"]

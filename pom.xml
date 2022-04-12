@@ -14,8 +14,8 @@
 
   <!-- Artifact Configuration -->
   <groupId>org.jboss.arquillian.container</groupId>
-  <artifactId>arquillian-parent-glassfish6</artifactId>
-  <version>1.0.0.Final-SNAPSHOT</version>
+  <artifactId>arquillian-parent-glassfish-jakarta</artifactId>
+  <version>6.0.0.Final-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Arquillian Container Parent GlassFish 6+</name>
   <description>GlassFish 6.x and Later Container integrations for the Arquillian Project</description>
@@ -29,17 +29,18 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha2</version.arquillian_core>
-    <version.glassfish6>6.0.0-M1</version.glassfish6>
+    <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
+    <version.glassfish6>6.0.0</version.glassfish6>
     <!-- The Jakarta EE 9 based release version -->
-    <version.jersey>3.0.0-M4</version.jersey>
-    <jakarta.cdi.version>3.0.0-M3</jakarta.cdi.version>
-    <jakarta.el.version>4.0.0.M1</jakarta.el.version>
-    <jakarta.interceptor.version>2.0.0-RC2</jakarta.interceptor.version>
-    <jakarta.ejb.version>4.0.0-RC1</jakarta.ejb.version>
-    <jakarta.annotation.version>2.0.0-RC1</jakarta.annotation.version>
-    <jakarta.servlet.version>5.0.0-M1</jakarta.servlet.version>
-    <jakarta.jaxb.version>3.0.0-RC3</jakarta.jaxb.version>
+    <version.jersey>3.0.1</version.jersey>
+    <jakarta.cdi.version>3.0.0</jakarta.cdi.version>
+    <jakarta.el.version>4.0.0</jakarta.el.version>
+    <jakarta.interceptor.version>2.0.0</jakarta.interceptor.version>
+    <jakarta.ejb.version>4.0.0</jakarta.ejb.version>
+    <jakarta.annotation.version>2.0.0</jakarta.annotation.version>
+    <jakarta.servlet.version>5.0.0</jakarta.servlet.version>
+    <jakarta.jaxb.version>3.0.0</jakarta.jaxb.version>
+    <jakarta.inject.version>2.0.0</jakarta.inject.version>
   </properties>
 
   <dependencyManagement>
@@ -48,12 +49,12 @@
       <dependency>
         <groupId>jakarta.annotation</groupId>
         <artifactId>jakarta.annotation-api</artifactId>
-        <version>2.0.0-RC1</version>
+        <version>${jakarta.annotation.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.inject</groupId>
         <artifactId>jakarta.inject-api</artifactId>
-        <version>2.0.0-RC4</version>
+        <version>${jakarta.inject.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.enterprise</groupId>
@@ -129,8 +130,8 @@
 
   <modules>
     <module>glassfish-common</module>
-    <module>glassfish-managed-6</module>
-    <module>glassfish-remote-6</module>
+    <module>glassfish-managed</module>
+    <module>glassfish-remote</module>
     <!--
     TODO:
     <module>glassfish-embedded-6</module>
