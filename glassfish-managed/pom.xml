@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.jboss.arquillian.container</groupId>
     <artifactId>arquillian-parent-glassfish6</artifactId>
-    <version>1.0.0.Final-SNAPSHOT</version>
+    <version>6.0.0.Final-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>arquillian-glassfish-managed-6</artifactId>
+  <artifactId>arquillian-glassfish-manged-jakarta</artifactId>
   <name>Arquillian Container GlassFish Managed 6</name>
   <description>GlassFish 6 Managed Container integration for the Arquillian Project</description>
 
@@ -26,7 +26,7 @@
 
     <dependency>
       <groupId>org.jboss.arquillian.container</groupId>
-      <artifactId>arquillian-glassfish6-common</artifactId>
+      <artifactId>arquillian-glassfish-common-jakarta</artifactId>
       <version>${project.version}</version>
     </dependency>
 

@@ -3,10 +3,10 @@
   <parent>
     <artifactId>arquillian-parent-glassfish6</artifactId>
     <groupId>org.jboss.arquillian.container</groupId>
-    <version>1.0.0.Final-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <version>6.0.0.Final-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>arquillian-glassfish6-common</artifactId>
+  <artifactId>arquillian-glassfish-common-jakarta</artifactId>
   <name>Arquillian Container GlassFish 6+ Common Services</name>
 
   <dependencies>
