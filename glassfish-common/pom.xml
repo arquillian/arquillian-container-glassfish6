@@ -3,7 +3,7 @@
   <parent>
     <artifactId>arquillian-parent-glassfish6</artifactId>
     <groupId>org.jboss.arquillian.container</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0.Final-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>arquillian-glassfish6-common</artifactId>
