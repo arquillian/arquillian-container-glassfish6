@@ -15,12 +15,12 @@ jobs:
       - run: ./mvnw -X verify
       - run:
           name: Target glassfish-managed-6/target
-          command: tar -czvf glassfish-managed-6.tar.gz glassfish-managed-6/target
+          command: tar -czvf glassfish-managed-6.tar.gz glassfish-managed/target
           when: always
       - store_artifacts:
           path: glassfish-managed-6.tar.gz
       - store_artifacts:
-          path: glassfish-managed-6/target/glassfish6/glassfish/domains/domain1/logs/server.log
+          path: glassfish-managed/target/glassfish6/glassfish/domains/domain1/logs/server.log
       - store_test_results:
           path: target/surefire-reports
       - save_cache:
