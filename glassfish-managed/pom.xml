@@ -9,7 +9,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>arquillian-glassfish-managed</artifactId>
+  <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
   <name>Arquillian Container GlassFish Managed 7</name>
   <description>GlassFish 7 Managed Container integration for the Arquillian Project</description>
 

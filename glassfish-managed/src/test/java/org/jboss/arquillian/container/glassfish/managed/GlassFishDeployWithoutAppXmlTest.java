@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -64,6 +65,7 @@ public class GlassFishDeployWithoutAppXmlTest {
     }
 }
 
+@Singleton
 class Client {
 
 }

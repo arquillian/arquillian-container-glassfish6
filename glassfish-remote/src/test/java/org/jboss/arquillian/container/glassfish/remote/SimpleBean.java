@@ -16,5 +16,8 @@
  */
 package org.jboss.arquillian.container.glassfish.remote;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class SimpleBean {
 }
