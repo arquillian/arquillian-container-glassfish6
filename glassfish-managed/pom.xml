@@ -31,7 +31,7 @@
 
     <dependency>
       <groupId>org.jboss.arquillian.container</groupId>
-      <artifactId>arquillian-glassfish-common</artifactId>
+      <artifactId>arquillian-glassfish-common-jakarta</artifactId>
       <version>${project.version}</version>
     </dependency>
 

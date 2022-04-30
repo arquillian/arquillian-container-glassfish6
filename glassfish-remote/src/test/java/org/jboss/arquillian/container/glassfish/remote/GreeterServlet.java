@@ -18,7 +18,7 @@
 /**
  * @author <a href="http://community.jboss.org/people/LightGuard">Jason Porter</a>
  */
-package org.jboss.arquillian.container.glassfish.remote_6;
+package org.jboss.arquillian.container.glassfish.remote;
 
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;

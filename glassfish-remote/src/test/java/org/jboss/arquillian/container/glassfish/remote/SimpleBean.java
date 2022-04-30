@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.container.glassfish.remote_6;
+package org.jboss.arquillian.container.glassfish.remote;
 
 public class SimpleBean {
 }
