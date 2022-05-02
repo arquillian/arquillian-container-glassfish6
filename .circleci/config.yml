@@ -27,4 +27,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              jdk-version: ["11"]
+              jdk-version: ["11.0"]
