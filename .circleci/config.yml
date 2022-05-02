@@ -6,7 +6,7 @@ jobs:
         type: string
     working_directory: ~/circleci-arquillian-container-glassfish-6
     docker:
-      - image: circleci/openjdk:<< parameters.jdk-version >>
+      - image: cimg/openjdk:<< parameters.jdk-version >>
     steps:
       - checkout
       - restore_cache:
