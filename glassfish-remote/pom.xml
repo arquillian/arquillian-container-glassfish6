@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>arquillian-glassfish-remote</artifactId>
+  <artifactId>arquillian-glassfish-remote-jakarta</artifactId>
   <name>Arquillian Container GlassFish Remote 7.x</name>
   <description>GlassFish 7.x Remote Container integration for the Arquillian Project</description>
 
@@ -26,7 +26,7 @@
 
     <dependency>
       <groupId>org.jboss.arquillian.container</groupId>
-      <artifactId>arquillian-glassfish-common</artifactId>
+      <artifactId>arquillian-glassfish-common-jakarta</artifactId>
       <version>${project.version}</version>
     </dependency>
 

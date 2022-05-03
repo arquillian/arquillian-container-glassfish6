@@ -18,7 +18,7 @@
 /**
  * @author <a href="http://community.jboss.org/people/LightGuard">Jason Porter</a>
  */
-package org.jboss.arquillian.container.glassfish.remote_6;
+package org.jboss.arquillian.container.glassfish.remote;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -35,8 +35,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 
 /**
  * Verifies arquillian tests can run in container mode with this REST based container.

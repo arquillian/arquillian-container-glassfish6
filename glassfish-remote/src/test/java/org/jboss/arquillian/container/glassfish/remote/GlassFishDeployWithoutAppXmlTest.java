@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.container.glassfish.remote_6;
+package org.jboss.arquillian.container.glassfish.remote;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -64,6 +65,7 @@ public class GlassFishDeployWithoutAppXmlTest {
     }
 }
 
+@Singleton
 class Client {
 
 }

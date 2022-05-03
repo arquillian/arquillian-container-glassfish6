@@ -4,13 +4,13 @@ jobs:
     parameters:
       jdk-version:
         type: string
-    working_directory: ~/circleci-arquillian-container-glassfish-6
+    working_directory: ~/circleci-arquillian-container-glassfish-jakarta
     docker:
       - image: circleci/openjdk:<< parameters.jdk-version >>
     steps:
       - checkout
       - restore_cache:
-          key: circleci-arquillian-container-glassfish-6-{{ checksum "pom.xml" }}
+          key: circleci-arquillian-container-glassfish-jakarta-{{ checksum "pom.xml" }}
       - run: ./mvnw verify -q -U -DskipTests # pre-fetch dependencies (dependency:resolve fails)
       - run: ./mvnw verify
       - store_test_results:
@@ -18,7 +18,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-arquillian-container-glassfish-6-{{ checksum "pom.xml" }}
+          key: circleci-arquillian-container-glassfish-jakarta-{{ checksum "pom.xml" }}
 
 workflows:
   version: 2.1
@@ -27,4 +27,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              jdk-version: ["8", "9"]
+              jdk-version: ["8", "11"]

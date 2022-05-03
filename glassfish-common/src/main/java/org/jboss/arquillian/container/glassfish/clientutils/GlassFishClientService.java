@@ -46,7 +46,7 @@ public class GlassFishClientService implements GlassFishClient {
     private static final String WEBMODULE = "WebModule";
     private static final String SERVLET = "Servlet";
     private static final String RUNNING_STATUS = "RUNNING";
-    public static final String USER_AGENT_VALUE = "arquillian-glassfish-managed-6";
+    public static final String USER_AGENT_VALUE = "arquillian-glassfish-managed-jakarta";
 
     private String target;
 
