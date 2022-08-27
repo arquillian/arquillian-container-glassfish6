@@ -29,12 +29,19 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha12</version.arquillian_core>
-    <version.glassfish>7.0.0-M8</version.glassfish>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>11</maven.compiler.release>
+
+    <!-- Arquillian -->
+    <arquillian.version>1.7.0.Alpha12</arquillian.version>
+
+    <!-- Glassfish -->
+    <glassfish.version>7.0.0-M8</glassfish.version>
+    <jersey.version>3.1.0-M7</jersey.version>
+
     <!-- The Jakarta EE 10 based release version -->
     <jakarta.annotation.version>2.1.1</jakarta.annotation.version>
     <jakarta.inject.version>2.0.1</jakarta.inject.version>
-    <jersey.version>3.1.0-M7</jersey.version>
     <jakarta.cdi.version>4.0.1</jakarta.cdi.version>
     <jakarta.el.version>5.0.0</jakarta.el.version>
     <jakarta.interceptor.version>2.1.0</jakarta.interceptor.version>
@@ -101,14 +108,14 @@
       <dependency>
         <groupId>org.jboss.arquillian</groupId>
         <artifactId>arquillian-bom</artifactId>
-        <version>${version.arquillian_core}</version>
+        <version>${arquillian.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.arquillian</groupId>
         <artifactId>arquillian-build</artifactId>
-        <version>${version.arquillian_core}</version>
+        <version>${arquillian.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

@@ -13,13 +13,7 @@
   <name>Arquillian Container GlassFish Managed 7</name>
   <description>GlassFish 7 Managed Container integration for the Arquillian Project</description>
 
-  <!-- Properties -->
-  <properties>
-    <version.arquillian_core>1.7.0.Alpha12</version.arquillian_core>
-  </properties>
-
   <dependencies>
-
     <dependency>
       <groupId>jakarta.ejb</groupId>
       <artifactId>jakarta.ejb-api</artifactId>
@@ -38,42 +32,35 @@
     <dependency>
       <groupId>org.jboss.arquillian.container</groupId>
       <artifactId>arquillian-container-spi</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.arquillian.container</groupId>
       <artifactId>arquillian-container-test-spi</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.arquillian.protocol</groupId>
       <artifactId>arquillian-protocol-servlet-jakarta</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.arquillian.testenricher</groupId>
       <artifactId>arquillian-testenricher-cdi-jakarta</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.arquillian.testenricher</groupId>
       <artifactId>arquillian-testenricher-ejb-jakarta</artifactId>
-      <version>${version.arquillian_core}</version>    
     </dependency>
 
     <dependency>
       <groupId>org.jboss.arquillian.testenricher</groupId>
       <artifactId>arquillian-testenricher-resource-jakarta</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jboss.arquillian.testenricher</groupId>
       <artifactId>arquillian-testenricher-initialcontext</artifactId>
-      <version>${version.arquillian_core}</version>
     </dependency>
 
     <dependency>
@@ -103,7 +90,7 @@
                 <artifactItem>
                   <groupId>${groupId}</groupId>
                   <artifactId>${artifactId}</artifactId>
-                  <version>${version.glassfish}</version>
+                  <version>${glassfish.version}</version>
                   <type>zip</type>
                   <outputDirectory>${project.build.directory}</outputDirectory>
                 </artifactItem>
