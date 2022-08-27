@@ -15,7 +15,7 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
+    <version.arquillian_core>1.7.0.Alpha12</version.arquillian_core>
   </properties>
 
   <dependencies>
