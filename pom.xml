@@ -35,7 +35,7 @@
     <jakarta.annotation.version>2.1.0</jakarta.annotation.version>
     <jakarta.inject.version>2.0.1</jakarta.inject.version>
     <jersey.version>3.1.0-M7</jersey.version>
-    <jakarta.cdi.version>4.0.0</jakarta.cdi.version>
+    <jakarta.cdi.version>4.0.1</jakarta.cdi.version>
     <jakarta.el.version>5.0.0</jakarta.el.version>
     <jakarta.interceptor.version>2.1.0</jakarta.interceptor.version>
     <jakarta.ejb.version>4.0.0</jakarta.ejb.version>
