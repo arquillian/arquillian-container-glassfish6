@@ -29,10 +29,12 @@
 
   <!-- Properties -->
   <properties>
-    <version.arquillian_core>1.7.0.Alpha10</version.arquillian_core>
-    <version.glassfish>7.0.0-M4</version.glassfish>
+    <version.arquillian_core>1.7.0.Alpha12</version.arquillian_core>
+    <version.glassfish>7.0.0-M8</version.glassfish>
     <!-- The Jakarta EE 10 based release version -->
-    <version.jersey>3.1.0-M5</version.jersey>
+    <jakarta.annotation.version>2.1.0</jakarta.annotation.version>
+    <jakarta.inject.version>2.0.1</jakarta.inject.version>
+    <jersey.version>3.1.0-M7</jersey.version>
     <jakarta.cdi.version>4.0.0</jakarta.cdi.version>
     <jakarta.el.version>5.0.0</jakarta.el.version>
     <jakarta.interceptor.version>2.1.0</jakarta.interceptor.version>
@@ -48,12 +50,12 @@
       <dependency>
         <groupId>jakarta.annotation</groupId>
         <artifactId>jakarta.annotation-api</artifactId>
-        <version>2.1.0</version>
+        <version>${jakarta.annotation.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.inject</groupId>
         <artifactId>jakarta.inject-api</artifactId>
-        <version>2.0.1</version>
+        <version>${jakarta.inject.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.enterprise</groupId>
@@ -75,27 +77,27 @@
       <dependency>
         <groupId>org.glassfish.jersey</groupId>
         <artifactId>jersey-bom</artifactId>
-        <version>${version.jersey}</version>
+        <version>${jersey.version}</version>
       </dependency>
 
       <!-- GlassFish -->
       <dependency>
         <groupId>org.glassfish.jersey.core</groupId>
         <artifactId>jersey-client</artifactId>
-        <version>${version.jersey}</version>
+        <version>${jersey.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.jersey.inject</groupId>
         <artifactId>jersey-hk2</artifactId>
-        <version>${version.jersey}</version>
+        <version>${jersey.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.jersey.media</groupId>
         <artifactId>jersey-media-multipart</artifactId>
-        <version>${version.jersey}</version>
+        <version>${jersey.version}</version>
       </dependency>
 
-      <!-- -->
+      <!-- Arquillian -->
       <dependency>
         <groupId>org.jboss.arquillian</groupId>
         <artifactId>arquillian-bom</artifactId>
@@ -112,7 +114,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
+ 
   <build>
     <plugins>
       <plugin>
