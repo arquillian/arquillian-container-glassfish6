@@ -149,9 +149,9 @@ public class GlassFishClientService implements GlassFishClient {
     private static final String GLASSFISH_VERSION = "/version";
 
     private void setGlassFishVersion() {
-        Map responseMap = getClientUtil().GETRequest(GLASSFISH_VERSION);
+        Map<String, Object> responseMap = getClientUtil().GETRequest(GLASSFISH_VERSION);
         if (responseMap != null) {
-            Map extraProperties = (Map) responseMap.get("extraProperties");
+            Map<String, Object> extraProperties = (Map<String, Object>) responseMap.get("extraProperties");
             if (extraProperties != null) {
                 Object versionNumberObj = extraProperties.get("version-number");
                 if (versionNumberObj instanceof String) {
