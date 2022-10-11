@@ -7,7 +7,7 @@
     <relativePath>..</relativePath>
   </parent>
   <artifactId>arquillian-glassfish-common-jakarta</artifactId>
-  <name>Arquillian Container GlassFish 7+ Common Services</name>
+  <name>Arquillian Container GlassFish Common 7.x</name>
 
   <dependencies>
 

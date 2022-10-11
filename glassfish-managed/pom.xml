@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
-  <name>Arquillian Container GlassFish Managed 7</name>
+  <name>Arquillian Container GlassFish Managed 7.x</name>
   <description>GlassFish 7 Managed Container integration for the Arquillian Project</description>
 
   <dependencies>

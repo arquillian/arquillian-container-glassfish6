@@ -17,7 +17,7 @@
   <artifactId>arquillian-container-glassfish-jakarta</artifactId>
   <version>1.0.0.Final-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Arquillian Container Parent GlassFish 7+</name>
+  <name>Arquillian Container GlassFish Parent 7.x</name>
   <description>GlassFish 7.x and Later Container integrations for the Arquillian Project</description>
 
   <scm>
@@ -37,7 +37,7 @@
     <arquillian.version>1.7.0.Alpha12</arquillian.version>
 
     <!-- Glassfish -->
-    <glassfish.version>7.0.0-M8</glassfish.version>
+    <glassfish.version>7.0.0-M9</glassfish.version>
     <jersey.version>3.1.0-M8</jersey.version>
 
     <!-- The Jakarta EE 10 based release version -->
@@ -122,7 +122,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
- 
+
   <build>
     <plugins>
       <plugin>
