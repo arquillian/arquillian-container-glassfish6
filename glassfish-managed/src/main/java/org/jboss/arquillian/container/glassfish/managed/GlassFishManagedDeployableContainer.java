@@ -51,7 +51,7 @@ public class GlassFishManagedDeployableContainer implements DeployableContainer<
 
         this.configuration = configuration;
         this.serverControl = new GlassFishServerControl(configuration);
-        this.glassFishManager = new CommonGlassFishManager<GlassFishManagedContainerConfiguration>(configuration);
+        this.glassFishManager = new CommonGlassFishManager<>(configuration);
     }
 
     public void start() throws LifecycleException {

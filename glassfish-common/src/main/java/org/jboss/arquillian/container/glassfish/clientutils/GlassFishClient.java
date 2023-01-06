@@ -60,12 +60,10 @@ public interface GlassFishClient {
     /**
      * Do undeploy the application
      *
-     * @param name
-     *     - application name
-     *
+     * @param name - application name
      * @return responseMap
      */
-    public Map doUndeploy(String name, FormDataMultiPart form);
+    public Map<String, Object> doUndeploy(String name, FormDataMultiPart form);
 
     /**
      * Verify whether the Domain Administration Server is running.

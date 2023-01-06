@@ -95,7 +95,7 @@ public class GlassFishClientUtil {
         Map<String, Object> responseMap = GETRequest(additionalResourceUrl);
         Map<String, String> childResources = new HashMap<String, String>();
 
-        Map resultExtraProperties = (Map) responseMap.get("extraProperties");
+        Map<String, Object> resultExtraProperties = (Map<String, Object>) responseMap.get("extraProperties");
         if (resultExtraProperties != null) {
             childResources = (Map<String, String>) resultExtraProperties.get("childResources");
         }
@@ -142,13 +142,13 @@ public class GlassFishClientUtil {
         }
     }
 
-    public List<Map> getInstancesList(String additionalResourceUrl) throws GlassFishClientException {
-        Map responseMap = GETRequest(additionalResourceUrl);
-        List<Map> instancesList = new ArrayList();
+    public List<Map<String,Object>> getInstancesList(String additionalResourceUrl) throws GlassFishClientException {
+        Map<String, Object> responseMap = GETRequest(additionalResourceUrl);
+        List<Map<String,Object>> instancesList = new ArrayList<Map<String,Object>>();
 
-        Map resultExtraProperties = (Map) responseMap.get("extraProperties");
+        Map<String, Object> resultExtraProperties = (Map<String, Object>) responseMap.get("extraProperties");
         if (resultExtraProperties != null) {
-            instancesList = (List<Map>) resultExtraProperties.get("instanceList");
+            instancesList = (List<Map<String,Object>>) resultExtraProperties.get("instanceList");
         }
 
         return instancesList;
