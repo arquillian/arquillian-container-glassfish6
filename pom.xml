@@ -37,6 +37,7 @@
 
     <!-- Arquillian -->
     <arquillian.version>1.7.0.Alpha13</arquillian.version>
+    <junit-jupiter.version>5.9.1</junit-jupiter.version>
 
     <!-- Glassfish -->
     <glassfish.version>7.0.0</glassfish.version>
@@ -119,6 +120,13 @@
         <groupId>org.jboss.arquillian</groupId>
         <artifactId>arquillian-build</artifactId>
         <version>${arquillian.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-jupiter.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
