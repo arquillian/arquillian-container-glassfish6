@@ -57,6 +57,15 @@ Alternatively, to use *Remote GlassFish Container Adapter*, add the following de
 </dependencies>
 ```
 
+Configure property `arquillian-glassfish-arquillian`, check the latest build version from https://jitpack.io/#hantsy/arquillian-container-glassfish-jakarta[JitPack Build Status] page.
+
+```xml
+<properties>
+    //other properties
+    <arquillian-glassfish-jakarta.version>1665e14a</arquillian-glassfish-jakarta.version>
+</properties>    
+```    
+
 Explore my personal https://github.com/hantsy/jakartaee10-sandbox[Jakarta EE 10 Example Codes] and get to know the Arquillian configuration details.
 
 If you are new to Arquillian, go to https://github.com/hantsy/jakartaee9-starter-boilerplate[Jakarta Starter Boilerplate] project to study it yourself.
