@@ -1,17 +1,17 @@
 = Arquillian GlassFish Container Integration
 
-> NOTE: This repository is a fork of the official [arquillian-container-glassfish6](https://github.com/arquillian/arquillian-container-glassfish6)
+> NOTE: This repository is my personal fork of the official https://github.com/arquillian/arquillian-container-glassfish6[arquillian-container-glassfish6].
 
-The original project is not active as expected, so I fork this project and update to use the latest GlassFish 7.0 and Jakarta EE 10.
+The upstream project is not so active, so I decide to fork this project and update to use the latest GlassFish 7.0 and Jakarta EE 10.
 
-* Update to Glassfish 7.0 and Jakarta EE 10 APIs to build the project.
-* Rename project artifact and add a `-jakarta` postfix.
-* Change the Java baseline to Java 11 and clean the source codes.
-* Update the tests to use JUnit 5.
+* Update to Glassfish 7.0 and Jakarta EE 10 APIs.
+* Rename project artifactIds and add a `-jakarta` postfix.
+* Change the build baseline Java version to Java 11, and clean the source codes.
+* Update the testing codes to the latest Arquillian Core 1.7.x and JUnit 5.
 
 == Usage 
 
-I use [Jitpack](https://jitpack.io) to share my work to Java communities. 
+*This project is not published to the Maven Central repository*. I choose https://jitpack.io[JitPack] to share my work to Java communities. 
 
 Add the following repository in your project pom.xml.
 
@@ -25,7 +25,7 @@ Add the following repository in your project pom.xml.
 </repositories>
 ```
 
-To use a *managed GlassFish container adapter*, add the following dependency.
+To use *Managed GlassFish Container Adapter*, add the following dependency.
 
 ```xml
 <dependencies>
@@ -39,9 +39,31 @@ To use a *managed GlassFish container adapter*, add the following dependency.
 </dependencies>
 ```
 
+Alternatively, to use *Remote GlassFish Container Adapter*, add the following dependency.
+
+```xml
+<dependencies>
+    // other dependencies
+    <dependency>
+        <groupId>com.github.hantsy.arquillian-container-glassfish-jakarta</groupId>
+        <artifactId>arquillian-glassfish-remote-jakarta</artifactId>
+        <version>${arquillian-glassfish-jakarta.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+Explore my personal https://github.com/hantsy/jakartaee10-sandbox[Jakarta EE 10 Example Codes] and get to know the Arquillian configuration details. 
+
+If you are new to Arquillian, go to https://github.com/hantsy/jakartaee9-starter-boilerplate[Jakarta Starter Boilerplate] project to study it yourself.
+
 == Build
 
 Clone the project and run the following command in the project root folder:
 
-`mvn clean install`
+```bash
+mvn clean install
+```
+
+
 
