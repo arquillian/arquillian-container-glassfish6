@@ -23,9 +23,9 @@
   <description>GlassFish 7.x and Later Container integrations for the Arquillian Project</description>
 
   <scm>
-    <connection>scm:git:git://git@github.com:arquillian/arquillian-container-glassfish6.git</connection>
-    <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-container-glassfish6.git</developerConnection>
-    <url>git://github.com/arquillian/arquillian-container-glassfish6.git</url>
+    <connection>scm:git:git://git@github.com:hantsy/arquillian-container-glassfish-jakarta.git</connection>
+    <developerConnection>scm:git:ssh://github.com/hantsy/arquillian-container-glassfish-jakarta.git</developerConnection>
+    <url>git://github.com/hantsy/arquillian-container-glassfish-jakarta.git</url>
     <tag>HEAD</tag>
   </scm>
 
