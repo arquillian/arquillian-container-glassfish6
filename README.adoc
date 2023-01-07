@@ -1,19 +1,47 @@
-= Arquillian GlassFish 6 Container Integration
+= Arquillian GlassFish Container Integration
 
-This is an initial port of the GlassFish 5 and earlier Arquillian container integrations to
-GlassFish 6, which builds on the Jakarta EE 9 APIs. Jakarta EE 9 switched the based API package namespace from javax.*
-to jakarta.*, introducing a source and binary incompatibility with previous versions of Java EE and Jakarta EE 8.
+> NOTE: This repository is a fork of the official [arquillian-container-glassfish6](https://github.com/arquillian/arquillian-container-glassfish6)
 
-Because of this, the GlassFish container integration for 6.x and later has been broken out into a new
-project.
+The original project is not active as expected, so I fork this project and update to use the latest GlassFish 7.0 and Jakarta EE 10.
 
-== Building
+* Update to Glassfish 7.0 and Jakarta EE 10 APIs to build the project.
+* Rename project artifact and add a `-jakarta` postfix.
+* Change the Java baseline to Java 11 and clean the source codes.
+* Update the tests to use JUnit 5.
 
-Build using the staging profile to pull in the staged but unreleased Jakarta dependencies:
+== Usage 
 
-`mvn -Pstaging install`
+I use [Jitpack](https://jitpack.io) to share my work to Java communities. 
 
-== TODO
-The GlassFish 5.x and earlier version had support for an embedded version of the container integration.
-Those APIs have changed significantly and the embedded container support still needs to be updated
-for GlassFish 6.x.
+Add the following repository in your project pom.xml.
+
+```xml
+<repositories>
+    //... other repositories
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+To use a *managed GlassFish container adapter*, add the following dependency.
+
+```xml
+<dependencies>
+    // other dependencies
+    <dependency>
+        <groupId>com.github.hantsy.arquillian-container-glassfish-jakarta</groupId>
+        <artifactId>arquillian-glassfish-managed-jakarta</artifactId>
+        <version>${arquillian-glassfish-jakarta.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+== Build
+
+Clone the project and run the following command in the project root folder:
+
+`mvn clean install`
+
