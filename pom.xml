@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <!-- Parent -->
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
     <version>39</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <!-- Model Version -->
@@ -17,7 +15,7 @@
   <!-- Artifact Configuration -->
   <groupId>org.jboss.arquillian.container</groupId>
   <artifactId>arquillian-container-glassfish-jakarta</artifactId>
-  <version>1.0.0.Final-SNAPSHOT</version>
+  <version>7.0.0</version>
   <packaging>pom</packaging>
   <name>Arquillian Container GlassFish Parent 7.x</name>
   <description>GlassFish 7.x and Later Container integrations for the Arquillian Project</description>
@@ -26,7 +24,7 @@
     <connection>scm:git:git://git@github.com:hantsy/arquillian-container-glassfish-jakarta.git</connection>
     <developerConnection>scm:git:ssh://github.com/hantsy/arquillian-container-glassfish-jakarta.git</developerConnection>
     <url>git://github.com/hantsy/arquillian-container-glassfish-jakarta.git</url>
-    <tag>HEAD</tag>
+    <tag>v7.0.0</tag>
   </scm>
 
   <!-- Properties -->
