@@ -2,6 +2,7 @@
 
 > NOTE: This repository is my personal fork of the official https://github.com/arquillian/arquillian-container-glassfish6[arquillian-container-glassfish6].
 
+image:https://github.com/hantsy/jakartaee9-servlet-starter-boilerplate/workflows/Build/badge.svg[build]
 image:https://jitpack.io/v/hantsy/arquillian-container-glassfish-jakarta.svg[link=https://jitpack.io/#hantsy/arquillian-container-glassfish-jakarta]
 image:https://jitci.com/gh/hantsy/arquillian-container-glassfish-jakarta/svg[link=https://jitci.com/gh/hantsy/arquillian-container-glassfish-jakarta]
 
