@@ -10,9 +10,16 @@ name: Build
 
 on:
   push:
-    branches: [ "master" ]
+    paths:
+      - "glassfish-*/**"
+      - "pom.xml"
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   build:
