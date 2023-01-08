@@ -57,7 +57,7 @@ Alternatively, to use *Remote GlassFish Container Adapter*, add the following de
 </dependencies>
 ```
 
-Configure property `arquillian-glassfish-arquillian`, check the latest build version from https://jitpack.io/#hantsy/arquillian-container-glassfish-jakarta[JitPack Build Status] page.
+Configure property `arquillian-glassfish-arquillian.version`, check the latest build version from https://jitpack.io/#hantsy/arquillian-container-glassfish-jakarta[JitPack Build Status] page.
 
 ```xml
 <properties>
