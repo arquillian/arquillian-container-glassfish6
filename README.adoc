@@ -69,7 +69,7 @@ Configure property `arquillian-glassfish-arquillian.version`, check the latest b
 
 Explore my personal https://github.com/hantsy/jakartaee10-sandbox[Jakarta EE 10 Example Codes] and get to know the Arquillian configuration details.
 
-If you are new to Arquillian, go to https://github.com/hantsy/jakartaee9-starter-boilerplate[Jakarta EE Starter Boilerplate] project to study it yourself.
+> NOTE: If you are new to Arquillian, go to https://github.com/hantsy/jakartaee9-starter-boilerplate[Jakarta EE Starter Boilerplate] project to study it yourself.
 
 == Build
 
