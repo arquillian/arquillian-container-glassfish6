@@ -95,7 +95,7 @@ class GlassFishServerControl {
             return;
         }
         try {
-            executeAdminDomainCommand("Starting database", "start-database", NO_ARGS, createProcessOutputConsumer());
+            executeAdminCommand("Starting database", "start-database", NO_ARGS, createProcessOutputConsumer());
         } catch (LifecycleException e) {
             logger.warning(DERBY_MISCONFIGURED_HINT);
             throw e;
@@ -104,7 +104,7 @@ class GlassFishServerControl {
 
     private void stopDerbyDatabase() throws LifecycleException {
         if (config.isEnableDerby()) {
-            executeAdminDomainCommand("Stopping database", "stop-database", NO_ARGS, createProcessOutputConsumer());
+            executeAdminCommand("Stopping database", "stop-database", NO_ARGS, createProcessOutputConsumer());
         }
     }
 
