@@ -35,7 +35,7 @@
 
     <!-- Arquillian -->
     <arquillian.version>1.7.0.Final</arquillian.version>
-    <junit-jupiter.version>5.9.3</junit-jupiter.version>
+    <junit-jupiter.version>5.10.0</junit-jupiter.version>
 
     <!-- Glassfish -->
     <glassfish.version>7.0.5</glassfish.version>
