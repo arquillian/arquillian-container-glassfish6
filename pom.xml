@@ -15,7 +15,7 @@
   <!-- Artifact Configuration -->
   <groupId>org.jboss.arquillian.container</groupId>
   <artifactId>arquillian-container-glassfish-jakarta</artifactId>
-  <version>7.0.8</version>
+  <version>7.0.9-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Arquillian Container GlassFish Parent 7.x</name>
   <description>GlassFish 7.x and Later Container integrations for the Arquillian Project</description>
