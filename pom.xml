@@ -43,17 +43,6 @@
 
     <!-- Jakarta EE API 10.0.0 -->
     <jakartaee-bom.version>10.0.0</jakartaee-bom.version>
-
-    <!-- The Jakarta EE 10 based release version -->
-    <!-- <jakarta.annotation.version>2.1.1</jakarta.annotation.version>
-    <jakarta.inject.version>2.0.1</jakarta.inject.version>
-    <jakarta.cdi.version>4.0.1</jakarta.cdi.version>
-    <jakarta.el.version>5.0.0</jakarta.el.version>
-    <jakarta.interceptor.version>2.1.0</jakarta.interceptor.version>
-    <jakarta.ejb.version>4.0.1</jakarta.ejb.version>
-    <jakarta.annotation.version>2.1.0</jakarta.annotation.version>
-    <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
-    <jakarta.jaxb.version>4.0.0</jakarta.jaxb.version> -->
   </properties>
 
   <dependencyManagement>
